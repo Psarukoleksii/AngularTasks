@@ -1,248 +1,93 @@
--- MySQL dump 10.13  Distrib 5.7.28, for Linux (x86_64)
-
---
-
--- Host: 127.0.0.1    Database: mar-2020
-
--- ------------------------------------------------------
-
--- Server version 5.7.28-0ubuntu0.19.04.2
-
-
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-
-/*!40101 SET NAMES utf8 */;
-
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-
-/*!40103 SET TIME_ZONE='+00:00' */;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-
-
---
-
--- Create dataBase mar-2020 and use it
-
---
-
-
-
-
-CREATE DATABASE IF NOT EXISTS june-2020;
-
-
-
-
-USE june-2020;
-
-
-
-
---
-
--- Table structure for table lesson
-
---
-
-
-
-
-DROP TABLE IF EXISTS lesson;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE lesson (
-
-  id int(11) NOT NULL AUTO_INCREMENT,
-
-  label varchar(255) DEFAULT NULL,
-
-  student_count int(11) DEFAULT NULL,
-
-  date varchar(255) DEFAULT NULL,
-
-  PRIMARY KEY (`id`)
-
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
-
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-
-
---
-
--- Dumping data for table lesson
-
---
-
-
-
-
-LOCK TABLES lesson WRITE;
-
-/*!40000 ALTER TABLE lesson DISABLE KEYS */;
-
-INSERT INTO lesson VALUES (1,'arrays',5,'21/11/2019'),(2,'loops',7,'23/11/2019'),(3,'objects',10,'27/12/2019'),(4,'html',11,'01/10/2019'),(5,'mysql',4,'10/12/2019'),(6,'closures',6,'11/11/2019'),(7,'oop',5,'15/12/2019'),(8,'function',6,'07/11/2019'),(9,'recursion',4,'15/12/2019'),(10,'callback',3,'06/10/2019');
-
-/*!40000 ALTER TABLE lesson ENABLE KEYS */;
-
-UNLOCK TABLES;
-
-
-
-
---
-
--- Table structure for table ratings
-
---
-
-
-
-
-DROP TABLE IF EXISTS ratings;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE ratings (
-
-  id int(11) NOT NULL AUTO_INCREMENT,
-
-  student_id int(11) DEFAULT NULL,
-
-  lesson_id int(11) DEFAULT NULL,
-
-  rating int(11) DEFAULT NULL,
-
-  PRIMARY KEY (`id`),
-
-  KEY ratings_lesson_id_fk (`lesson_id`),
-
-  KEY ratings_students_id_fk (`student_id`),
-
-  CONSTRAINT ratings_lesson_id_fk FOREIGN KEY (`lesson_id`) REFERENCES lesson (`id`),
-
-  CONSTRAINT ratings_students_id_fk FOREIGN KEY (`student_id`) REFERENCES students (`id`)
-
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-
-
---
-
--- Dumping data for table ratings
-
---
-
-
-
-
-LOCK TABLES ratings WRITE;
-
-/*!40000 ALTER TABLE ratings DISABLE KEYS */;
-
-INSERT INTO ratings VALUES (1,5,1,5),(2,5,2,4),(3,2,1,3),(4,6,3,5),(5,1,3,3),(6,5,4,5),(7,3,6,2),(8,3,7,5),(9,6,6,4),(10,4,2,3),(11,7,7,4),(12,5,8,4),(13,9,7,3),(14,8,9,4);
-
-/*!40000 ALTER TABLE ratings ENABLE KEYS */;
-
-UNLOCK TABLES;
-
-
-
-
---
-
--- Table structure for table students
-
---
-
-
-
-
-DROP TABLE IF EXISTS students;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE students (
-
-  id int(11) NOT NULL AUTO_INCREMENT,
-
-  name varchar(255) DEFAULT NULL,
-
-  age int(11) DEFAULT NULL,
-
-  gender varchar(255) DEFAULT NULL,
-
-  PRIMARY KEY (`id`)
-
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
-
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-
-
---
-
--- Dumping data for table students
-
---
-
-
-
-
-LOCK TABLES students WRITE;
-
-/*!40000 ALTER TABLE students DISABLE KEYS */;
-
-INSERT INTO students VALUES (1,'Oleg',20,'male'),(2,'Dima',25,'male'),(3,'Roman',18,'male'),(4,'Olga',15,'female'),(5,'Ira',29,'female'),(6,'Anton',31,'male'),(7,'Ivan',38,'male'),(8,'Veniamin',56,'male'),(9,'Mary',37,'female'),(10,'Kardebalita',50,'female'),(11,'Huanitos',10,'male');
-
-/*!40000 ALTER TABLE students ENABLE KEYS */;
-
-UNLOCK TABLES;
-
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
-
-
-
--- Dump completed on 2020-08-07 20:06:41
+SET SQL_MODE = '';
+
+
+CREATE SCHEMA IF NOT EXISTS `bank` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `bank` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Department`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bank`.`department` (
+  `idDepartment` INT NOT NULL,
+  `DepartmentCity` VARCHAR(45) NULL,
+  `CountOfWorkers` INT NULL,
+  PRIMARY KEY (`idDepartment`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Client`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bank`.`client` (
+  `idClient` INT NOT NULL,
+  `FirstName` VARCHAR(45) NULL,
+  `LastName` VARCHAR(45) NULL,
+  `Education` VARCHAR(45) NULL,
+  `Passport` VARCHAR(45) NULL,
+  `City` VARCHAR(45) NULL,
+  `Age` VARCHAR(45) NULL,
+  `Department_idDepartment` INT NOT NULL,
+  PRIMARY KEY (`idClient`),
+  INDEX `fk_Client_Department_idx` (`Department_idDepartment` ASC),
+  CONSTRAINT `fk_Client_Department`
+    FOREIGN KEY (`Department_idDepartment`)
+    REFERENCES `bank`.`department` (`idDepartment`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Application`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bank`.`application` (
+  `idApplication` INT NOT NULL,
+  `Sum` INT NULL,
+  `CreditState` VARCHAR(45) NULL,
+  `Currency` VARCHAR(45) NULL,
+  `Client_idClient` INT NOT NULL,
+  PRIMARY KEY (`idApplication`),
+  INDEX `fk_Application_Client1_idx` (`Client_idClient` ASC),
+  CONSTRAINT `fk_Application_Client1`
+    FOREIGN KEY (`Client_idClient`)
+    REFERENCES `bank`.`client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+
+
+INSERT INTO `bank`.`department` (`idDepartment`, `DepartmentCity`, `CountOfWorkers`) VALUES ('1', 'Kyiv', '12');
+INSERT INTO `bank`.`department` (`idDepartment`, `DepartmentCity`, `CountOfWorkers`) VALUES ('2', 'Lviv', '15');
+INSERT INTO `bank`.`department` (`idDepartment`, `DepartmentCity`, `CountOfWorkers`) VALUES ('3', 'Rivne', '8');
+INSERT INTO `bank`.`department` (`idDepartment`, `DepartmentCity`, `CountOfWorkers`) VALUES ('4', 'Kyiv', '16');
+INSERT INTO `bank`.`department` (`idDepartment`, `DepartmentCity`, `CountOfWorkers`) VALUES ('5', 'Lviv', '10');
+
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('1', 'Roman', 'Beregulak', 'high', 'KC249584', 'Lviv', '25', '2');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('2', 'Mariya', 'Pehnyk', 'high', 'KC350156', 'Stryi', '29', '2');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('3', 'Olena', 'Fedychkanych', 'middle', 'KC850145', 'Krasne', '19', '1');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('4', 'Igor', 'Petriv', 'technic', 'KC853952', 'Kyiv', '21', '4');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('5', 'Volodymyr', 'Gryniv', 'high', 'KC849153', 'Skvyra', '35', '4');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('6', 'Oleg', 'Fedyshyn', 'high', 'KC012412', 'Lviv', '42', '5');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('7', 'Taras', 'Sobko', 'middle', 'KC249504', 'Rivne', '20', '3');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('8', 'Viktor', 'Spas', 'technic', 'KC823412', 'Kyiv', '22', '2');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('9', 'Julia', 'Mokina', 'technic', 'KC908295', 'Kyiv', '21', '1');
+INSERT INTO `bank`.`client` (`idClient`, `FirstName`, `LastName`, `Education`, `Passport`, `City`, `Age`, `Department_idDepartment`) VALUES ('10', 'Oksana', 'Indusiva', 'high', 'KC723532', 'Sambir', '32', '1');
+
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('1', '4000', 'Returned', 'Dollar', '1');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('2', '5000', 'Not returned', 'Dollar', '4');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('3', '7500', 'Returned', 'Euro', '6');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('4', '3200', 'Not returned', 'Gryvnia', '2');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('5', '3700', 'Returned', 'Gryvnia', '3');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('6', '4100', 'Returned', 'Dollar', '1');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('7', '15100', 'Not returned', 'Gryvnia', '9');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('8', '25600', 'Not returned', 'Dollar', '10');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('9', '12300', 'Not returned', 'Gryvnia', '8');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('10', '9700', 'Returned', 'Dollar', '5');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('11', '9000', 'Not returned', 'Gryvnia', '7');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('12', '8100', 'Not returned', 'Dollar', '3');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('13', '4400', 'Not returned', 'Euro', '8');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('14', '2700', 'Returned', 'Dollar', '10');
+INSERT INTO `bank`.`application` (`idApplication`, `Sum`, `CreditState`, `Currency`, `Client_idClient`) VALUES ('15', '6600', 'Not returned', 'Euro', '3');
